@@ -1,0 +1,777 @@
+<?php
+$servername = "localhost";
+$username = "rushabh-database";
+$password = "Rus@1234";
+$dbname = "gstinvoice1";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);	
+}
+echo "<br>";
+echo "Connected successfully";
+echo "<br>";
+
+
+ $url1 = "http://api.indeed.com/ads/apisearch?publisher=7260941144511308&l=bangalore&co=in&filter=1&userip=1.2.3.4&start=";
+ $url2 =  "&limit=100&fromage=1&v=2&format=json";
+ echo "<br>";
+ 
+ $start = 10;
+ $url1 = $url1.$start.$url2;
+ echo $url1;
+
+// http://api.indeed.com/ads/apisearch?publisher=7260941144511308&l=mumbai&co=in&userip=1.2.3.4&start=40&limit=100&fromage=3&v=2&format=json 
+
+
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "$url1",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "Cache-Control: no-cache",
+    "Postman-Token: 011054d3-0e58-4d75-895e-e7c2937ae7e4"
+  ),
+));
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  #echo $response;
+}
+
+$obj = json_decode($response,true);
+
+
+echo "<br>" ;
+echo "<br>" ;
+echo "<br>" ;
+echo "<br>" ;
+echo "first <br>" ;
+echo "second <br>" ;
+echo $obj['jobtitle']['state'];
+echo " third <br>" ;
+$x = $obj['results']['0'];
+$y = $obj['results']['1'];
+echo " forth <br>" ;
+echo $x;
+echo "<br>";
+echo $obj;
+echo "<br>";
+var_dump($x);
+echo "<br>";
+echo "<br>" ;
+echo $y;
+echo "<br>";
+echo $obj;
+echo "<br>";
+var_dump($y);
+
+echo " fifth <br>" ;
+echo "<br> date" ;
+$time2 =  'Fri, 21 Dec 2018 03:09:59 GMT';
+$time = strtotime('$time2');
+
+$newformat = date('d-m-y-h-i-s',$time);
+
+echo $time;
+echo $newformat;
+// 2003-10-16
+echo "<br> date end" ;
+$z = $obj['results']['0']['jobtitle'];
+$z1 = $obj['results']['0']['company'];
+$z2 = $obj['results']['0']['snippet'];
+$z3 = $obj['results']['0']['date'];
+$z4 = $obj['totalResults'];
+echo $z4;
+
+for ($x = 0; $x <= $z4;) {
+    #echo "The number is: $x <br>";
+    echo "<br>";
+    echo " $x " ;
+    echo "<br>";
+    $x = $x+10;
+    $url1 = "http://api.indeed.com/ads/apisearch?publisher=7260941144511308&l=mumbai&co=in&filter=1&userip=1.2.3.4&start=";
+    $url2 =  "&limit=100&fromage=1&v=2&format=json";
+    echo "<br>";
+    //$start = 10;
+    $url1 = $url1.$x.$url2;
+    echo $url1;
+    echo "<br>";
+    
+    $curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "$url1",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "Cache-Control: no-cache",
+    "Postman-Token: 011054d3-0e58-4d75-895e-e7c2937ae7e4"
+  ),
+));
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  #echo $response;
+}
+
+//$obj23 = json_decode($response,true);
+//$data = $obj['results']['0']['jobtitle'];
+ 
+//echo "$data";   
+    
+}
+
+var_dump($z);
+
+
+echo
+ 
+ 
+  $url1 = "http://api.indeed.com/ads/apisearch?publisher=7260941144511308&l=bangalore&co=in&userip=1.2.3.4&start=";
+  $url2 =  "&limit=100&fromage=3&v=2&format=json";
+  echo "<br>";
+ 
+ $start = 10;
+ $url1 = $url1.$start.$url2;
+ echo $url1;
+ 
+  
+ 
+ 
+ 
+ 
+/**
+for ($x = 0; $x <= 10; $x++) {
+    #echo "The number is: $x <br>";
+    echo "<br>";
+    echo $obj['results'][$x]['jobtitle'];
+    echo "<br>";
+    echo $obj['results'][$x]['company'];
+    echo "<br>";
+    
+} 
+*/
+?>
+
+
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 2 | Starter</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+        page. However, you can choose any other skin. Make sure you
+        apply the skin class to the body tag so the changes take effect. -->
+  <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesnt work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- Google Font -->
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to get the
+desired effect
+|---------------------------------------------------------|
+| SKINS         | skin-blue                               |
+|               | skin-black                              |
+|               | skin-purple                             |
+|               | skin-yellow                             |
+|               | skin-red                                |
+|               | skin-green                              |
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | fixed                                   |
+|               | layout-boxed                            |
+|               | layout-top-nav                          |
+|               | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <!-- Main Header -->
+  <header class="main-header">
+
+    <!-- Logo -->
+    <a href="index2.html" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>A</b>LT</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Admin</b>LTE</span>
+    </a>
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+          <li class="dropdown messages-menu">
+            <!-- Menu toggle button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-envelope-o"></i>
+              <span class="label label-success">4</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">You have 4 messages</li>
+              <li>
+                <!-- inner menu: contains the messages -->
+                <ul class="menu">
+                  <li><!-- start message -->
+                    <a href="#">
+                      <div class="pull-left">
+                        <!-- User Image -->
+                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                      </div>
+                      <!-- Message title and timestamp -->
+                      <h4>
+                        Support Team
+                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                      </h4>
+                      <!-- The message -->
+                      <p>Why not buy a new awesome theme?</p>
+                    </a>
+                  </li>
+                  <!-- end message -->
+                </ul>
+                <!-- /.menu -->
+              </li>
+              <li class="footer"><a href="#">See All Messages</a></li>
+            </ul>
+          </li>
+          <!-- /.messages-menu -->
+
+          <!-- Notifications Menu -->
+          <li class="dropdown notifications-menu">
+            <!-- Menu toggle button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-bell-o"></i>
+              <span class="label label-warning">10</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">You have 10 notifications</li>
+              <li>
+                <!-- Inner Menu: contains the notifications -->
+                <ul class="menu">
+                  <li><!-- start notification -->
+                    <a href="#">
+                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                    </a>
+                  </li>
+                  <!-- end notification -->
+                </ul>
+              </li>
+              <li class="footer"><a href="#">View all</a></li>
+            </ul>
+          </li>
+          <!-- Tasks Menu -->
+          <li class="dropdown tasks-menu">
+            <!-- Menu Toggle Button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-flag-o"></i>
+              <span class="label label-danger">9</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">You have 9 tasks</li>
+              <li>
+                <!-- Inner menu: contains the tasks -->
+                <ul class="menu">
+                  <li><!-- Task item -->
+                    <a href="#">
+                      <!-- Task title and progress text -->
+                      <h3>
+                        Design some buttons
+                        <small class="pull-right">20%</small>
+                      </h3>
+                      <!-- The progress bar -->
+                      <div class="progress xs">
+                        <!-- Change the css width attribute to simulate progress -->
+                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
+                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                          <span class="sr-only">20% Complete</span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <!-- end task item -->
+                </ul>
+              </li>
+              <li class="footer">
+                <a href="#">View all tasks</a>
+              </li>
+            </ul>
+          </li>
+          <!-- User Account Menu -->
+          <li class="dropdown user user-menu">
+            <!-- Menu Toggle Button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <!-- The user image in the navbar-->
+              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <!-- hidden-xs hides the username on small devices so only the image appears. -->
+              <span class="hidden-xs">Rushabh Soni</span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- The user image in the menu -->
+              <li class="user-header">
+                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+                <p>
+                  Rushabh Soni - Web Developer
+                  <small>Member since Nov. 2012</small>
+                </p>
+              </li>
+              <!-- Menu Body -->
+              <li class="user-body">
+                <div class="row">
+                  <div class="col-xs-4 text-center">
+                    <a href="#">Followers</a>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                    <a href="#">Sales</a>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                    <a href="#">Friends</a>
+                  </div>
+                </div>
+                <!-- /.row -->
+              </li>
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <!-- Control Sidebar Toggle Button -->
+          <li>
+            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>Alexander Pierce</p>
+          <!-- Status -->
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
+
+      <!-- search form (Optional) -->
+      <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+              </button>
+            </span>
+        </div>
+      </form>
+      <!-- /.search form -->
+
+      <!-- Sidebar Menu -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">HEADER</li>
+        <!-- Optionally, you can add icons to the links -->
+        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
+        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#">Link in level 2</a></li>
+            <li><a href="#">Link in level 2</a></li>
+          </ul>
+        </li>
+      </ul>
+      <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1> Search Query :
+          <?php echo  $obj['query']; ?>
+        <small>Optional description</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content container-fluid">
+
+      <!--------------------------
+        | Your Page Content Here |
+        -------------------------->
+        <div class="box">
+  <div class="box-header with-border">
+    <h1 class="box-title"> <?php      echo  $obj['query']; ?>  </h1>
+    <div class="box-tools pull-right">
+      <!-- Buttons, labels, and many other things can be placed here! -->
+      <!-- Here is a label for example -->
+      <span class="label label-primary">Label</span>
+    </div>
+    <!-- /.box-tools -->
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    
+    <?php echo $z1; ?>
+    <?php echo $z2; ?>
+    
+  </div>
+  <!-- /.box-body -->
+    <!-- /.box-header -->
+    
+  <!-- /.box-body -->
+  <div class="box-footer">
+     <?php echo $z3; ?>
+  </div>
+  
+  <!-- box-footer -->
+</div>
+<!-- /.box -->  
+
+
+
+
+ <div class="box">
+  <div class="box-header with-border">
+    <h3 class="box-title"> box 3 </h3>
+    <div class="box-tools pull-right">
+      <!-- Buttons, labels, and many other things can be placed here! -->
+      <!-- Here is a label for example -->
+      <span class="label label-primary">Label</span>
+    </div>
+    <!-- /.box-tools -->
+  </div>
+  <div class="box-body">
+    The body of the box kljhklhkl
+  </div>
+  <!-- /.box-body -->
+  <div class="box-footer">       
+ <?php              
+echo $obj['results']['0']['jobtitle'];
+echo "<br>";       
+echo "<br>";
+echo $obj['results']['0']['company'];
+echo "<br>";
+echo $obj['results']['0']['city'];
+echo "<br>";
+echo "<br>";
+echo "state: ";
+echo  $obj['results']['0']['state'];
+echo "<br>";  
+echo $obj['results']['0']['snippet'];
+echo "<br>";
+echo "<br>";
+echo $obj['results']['0']['date']; 
+echo "<br>";
+#<a href="<?php echo $obj['results']['0']['url']?>">apply link</a>
+?> 
+  </div>
+  <!-- box-footer -->
+</div>
+<!-- /.box -->
+
+<?php
+for ($x = 0; $x <= 20; $x++)
+ {
+ 
+    
+    #echo "<br>";
+     echo "<div class=box>";
+     echo "<div class=box-header with-border>" ; 
+     echo "<h3 class=box-title>"  ;
+     
+     echo  $obj['results'][$x]['jobtitle'];
+     echo "</h3>";
+     echo "<div class=box-tools pull-right>" ;
+     echo " <span class=label label-primary>Label</span>" ;
+     echo "</div>";
+     echo "  <!-- /.box-tools -->";
+     echo "</div>";
+     
+     echo "<!-- /.box-header -->" ;
+     echo "<div class=box-body>";
+     #echo "The body of the box kljhklhkl <br>";
+     #echo  $obj['results'][$x]['jobtitle'];
+     
+     
+     echo "<br>";
+     echo "Total results :- ";
+     echo  $obj['totalResults']; 
+     echo "<br>";
+     echo "company  :   ";
+     
+     echo  $obj['results'][$x]['company'];
+     echo "<br>";
+     echo "<br> city:- ";
+     
+     echo  $obj['results'][$x]['city'];
+     echo "<br>";
+      echo "city :  ";
+     echo  $obj['results'][$x]['state'];
+     echo "<br>";
+
+     echo "country:";
+     echo  $obj['results'][$x]['country'];
+     echo "<br>";
+     echo "<a href=";
+     echo $obj['results'][$x]['url'] ; 
+     echo ">apply link</a>" ;
+     echo "<br>";
+     echo $obj['results'][$x]['snippet'] ;    
+     echo "<br>";
+     echo $obj['results'][$x]['formattedRelativeTime'];
+     echo "<br>";
+     echo $obj['results'][$x]['formattedLocationFull'];
+     echo "<br>";
+     echo $obj['results'][$x]['date'];    
+     $k = $obj['results'][$x]['company'];
+     $l = $obj['results'][$x]['city'];
+     $m = $obj['results'][$x]['state'];
+     $q = $obj['results'][$x]['url'];
+     $n = $obj['results'][$x]['country'];
+     $o = $obj['results'][$x]['snippet'];
+     $p = $obj['results'][$x]['jobkey'];
+     $s = $obj['results'][$x]['date'];
+     $r = $obj['results'][$x]['jobtitle'];
+     echo "<br> date" ;
+$time2 =  'Fri, 21 Dec 2018 03:09:59 GMT';
+$time = strtotime('$s');
+
+$newformat = date('d-m-y',$time);
+echo "<br>date :- ";
+echo $time;
+echo $newformat;
+// 2003-10-16
+//echo "<br> date end" ;
+
+//$time2 =  'Fri, 21 Dec 2018 03:09:59 GMT';
+
+$time = strtotime($s);
+
+$newformat = date('d-m-y',$time);
+
+echo "s :-";
+echo $s;
+
+echo $newformat;
+
+
+echo "<br>";
+// 2003-10-16
+     
+     
+$sql = "INSERT INTO jobs (title,company,city,state,contry,jobkey,date,snippet,url) VALUES ('$r','$k','$l','$m','$n','$p','$newformat','$o','$q')";
+
+
+if ($conn->query($sql) === TRUE) {
+    echo "New record created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+     
+     echo "<br>";
+     
+     echo "</div>";
+     
+     echo "<!-- /.box-body -->";
+     echo "<div class=box-footer>";
+     echo " </div>";
+     echo "<!-- box-footer -->";
+     echo "</div>";
+     
+ }
+?>
+
+
+ 
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+    <div class="pull-right hidden-xs">
+      Anything you want
+    </div>
+    <!-- Default to the left -->
+    <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+      <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <!-- Home tab content -->
+      <div class="tab-pane active" id="control-sidebar-home-tab">
+        <h3 class="control-sidebar-heading">Recent Activity</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:;">
+              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Langdons Birthday</h4>
+
+                <p>Will be 23 on April 24th</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+        <h3 class="control-sidebar-heading">Tasks Progress</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:;">
+              <h4 class="control-sidebar-subheading">
+                Custom Template Design
+                <span class="pull-right-container">
+                    <span class="label label-danger pull-right">70%</span>
+                  </span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+      </div>
+      <!-- /.tab-pane -->
+      <!-- Stats tab content -->
+      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+      <!-- /.tab-pane -->
+      <!-- Settings tab content -->
+      <div class="tab-pane" id="control-sidebar-settings-tab">
+        <form method="post">
+          <h3 class="control-sidebar-heading">General Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Report panel usage
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Some information about this general settings option
+            </p>
+          </div>
+          <!-- /.form-group -->
+        </form>
+      </div>
+      <!-- /.tab-pane -->
+    </div>
+  </aside>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+  immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED JS SCRIPTS -->
+
+<!-- jQuery 3 -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+
+<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. -->
+</body>
+</html>
+
+
+
