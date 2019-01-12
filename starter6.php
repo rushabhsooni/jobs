@@ -1,7 +1,7 @@
 <?php
 // connection code 
 $servername = "localhost";
-$username = "alka";
+$username = "root";
 $password = "xEjrfVm3ALbF";
 $dbname = "jobs";
 
