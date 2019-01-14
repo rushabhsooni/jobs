@@ -163,7 +163,7 @@ for ($x = 0; $x <= $z4;) {
     echo $newformat;
     
     
-    $sql = "INSERT INTO india (title,company,city,state,contry,jobkey,date,snippet,url) VALUES ('$r','$k','$l','$m','$n','$p','$newformat','$o','$q')";
+    $sql = "INSERT INTO india (title,company,city,state,country,jobkey,date,snippet,url) VALUES ('$r','$k','$l','$m','$n','$p','$newformat','$o','$q')";
 
 
     if ($conn->query($sql) === TRUE) {
