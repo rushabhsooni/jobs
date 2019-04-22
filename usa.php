@@ -19,7 +19,7 @@ echo "<br>";
 
 // find the number of jobs 
 
- $url1 = "http://api.indeed.com/ads/apisearch?publisher=7260941144511308&q=india&co=in&filter=1&userip=1.2.3.4&start=";
+ $url1 = "http://api.indeed.com/ads/apisearch?publisher=7260941144511308&q=&co=us&filter=1&userip=1.2.3.4&start=";
  $url2 =  "&limit=100&fromage=1&v=2&format=json";
  echo "<br>";
  
@@ -60,7 +60,8 @@ if ($err) {
 $obj2 = json_decode($response,true);
 echo " no of jobs " ;
 $z4 = $obj2['totalResults'];
-echo $z4;
+//echo $z4;
+echo $obj2;
 
 
 // ending  the number of jobs  
@@ -77,7 +78,7 @@ for ($x = 0; $x <= $z4;) {
     echo " $x " ;
     echo "<br>";
     $x = $x+20;
-    $url1 = "http://api.indeed.com/ads/apisearch?publisher=7260941144511308&q=india&co=in&filter=1&userip=1.2.3.4&start=";
+    //$url1 = "http://api.indeed.com/ads/apisearch?publisher=7260941144511308&q=&co=us&filter=1&userip=1.2.3.4&start=";
     $url2 =  "&limit=25&fromage=1&v=2&format=json";
     echo "<br>";
     //$start = 10;
@@ -113,6 +114,7 @@ for ($x = 0; $x <= $z4;) {
    }
 
    $obj23 = json_decode($response,true);
+   echo $obj23;
    //$data = $obj23['results']['0']['jobtitle'];
    //echo $data ; 
    //echo "<br>";
@@ -154,6 +156,11 @@ for ($x = 0; $x <= $z4;) {
      $val1 = mysqli_real_escape_string($o);
      
 
+     echo $obj23;
+
+     echo $obj23['results'][$y]['date'];
+
+
      echo $val1 ;
      
      echo "  job snippet -" ;
@@ -172,7 +179,7 @@ for ($x = 0; $x <= $z4;) {
     echo $newformat;
     
     
-    $sql = "INSERT INTO india (title,company,city,state,country,jobkey,date,snippet,url) VALUES ('$r','$k','$l','$m','$n','$p','$newformat','$val1','$q')";
+    $sql = "INSERT INTO usa (title,company,city,state,country,jobkey,date,snippet,url) VALUES ('$r','$k','$l','$m','$n','$p','$newformat','$o','$q')";
 
 
     if ($conn->query($sql) === TRUE) {

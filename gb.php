@@ -19,7 +19,7 @@ echo "<br>";
 
 // find the number of jobs 
 
- $url1 = "http://api.indeed.com/ads/apisearch?publisher=7260941144511308&q=india&co=in&filter=1&userip=1.2.3.4&start=";
+ $url1 = "http://api.indeed.com/ads/apisearch?publisher=7260941144511308&q=london&co=gb&filter=1&userip=1.2.3.4&start=";
  $url2 =  "&limit=100&fromage=1&v=2&format=json";
  echo "<br>";
  
@@ -58,26 +58,24 @@ if ($err) {
 }
 
 $obj2 = json_decode($response,true);
-echo " no of jobs " ;
+echo "<br>";
+echo " no of jobs :- " ;
 $z4 = $obj2['totalResults'];
+
 echo $z4;
 
 
 // ending  the number of jobs  
+// echo $z4 ; 
 
-
-
-
-
-
- echo $z4 ; 
 for ($x = 0; $x <= $z4;) {
     #echo "The number is: $x <br>";
     echo "<br>";
     echo " $x " ;
     echo "<br>";
     $x = $x+20;
-    $url1 = "http://api.indeed.com/ads/apisearch?publisher=7260941144511308&q=india&co=in&filter=1&userip=1.2.3.4&start=";
+
+    $url1 = "http://api.indeed.com/ads/apisearch?publisher=7260941144511308&q=london&co=gb&filter=1&userip=1.2.3.4&start=";
     $url2 =  "&limit=25&fromage=1&v=2&format=json";
     echo "<br>";
     //$start = 10;
@@ -113,7 +111,7 @@ for ($x = 0; $x <= $z4;) {
    }
 
    $obj23 = json_decode($response,true);
-   //$data = $obj23['results']['0']['jobtitle'];
+   //$data = $obj23['results']['0']['jobtitle'];0.
    //echo $data ; 
    //echo "<br>";
    //$data2 = $obj23['results']['1']['jobtitle'];
@@ -127,7 +125,7 @@ for ($x = 0; $x <= $z4;) {
    
   // echo $obj23 ;
   // echo "$data" ;  
-   echo "helo";
+  
    echo "<br>" ;
    //var_dump($data);
    
@@ -140,51 +138,65 @@ for ($x = 0; $x <= $z4;) {
   
      echo "  -" ;
      
-    $data4 = $obj23['results'][$y]['jobtitle'];
-    
+     $data4 = $obj23['results'][$y]['jobtitle'];
+     $title2 = mysqli_real_escape_string($conn,$data4);
+
      $k = $obj23['results'][$y]['company'];
+     $com2 = mysqli_real_escape_string($conn,$k);
+
      $l = $obj23['results'][$y]['city'];
+     $city = mysqli_real_escape_string($conn,$l);
+
      $m = $obj23['results'][$y]['state'];
      $q = $obj23['results'][$y]['url'];
      $n = $obj23['results'][$y]['country'];
      $o = $obj23['results'][$y]['snippet'];
      $p = $obj23['results'][$y]['jobkey'];
      $s = $obj23['results'][$y]['date'];
-     $r = $obj23['results'][$y]['jobtitle'];
-     $val1 = mysqli_real_escape_string($o);
+     //$r = $obj23['results'][$y]['jobtitle'];
+     $val1 = mysqli_real_escape_string($conn,$o);
+
      
 
-     echo $val1 ;
+     // echo $val1 ;
      
-     echo "  job snippet -" ;
+     //echo "  job snippet -" ;
 
 
 
     echo $data4;
-    echo "|--|";
+   // echo "|--|";
    // echo $k; 
-    echo "|--|";
+   // echo "|--|";
    // echo $l;
-    echo "|--|";
+   // echo "|--|";
     //echo $s;
     $time = strtotime($s);
     $newformat = date('d-m-y',$time);
-    echo $newformat;
+    // echo $newformat;
+    echo "<br>";
     
     
-    $sql = "INSERT INTO india (title,company,city,state,country,jobkey,date,snippet,url) VALUES ('$r','$k','$l','$m','$n','$p','$newformat','$val1','$q')";
+    $sql = "INSERT INTO gb (title,company,city,state,country,jobkey,date,snippet,url) VALUES ('$title2','$com2','$city','$m','$n','$p','$newformat','$o','$q')";
 
 
     if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";}
+       echo "New record created successfully";
+          }
     else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+          //echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+           //print 'no way!';
+           echo "No record created successfully";
+           echo "<br>";
       }
+
+
+  
     
     // start date
    echo "<br>" ;
 
-     
+   // echo "inne for loop"; 
     // end date
     
   }
